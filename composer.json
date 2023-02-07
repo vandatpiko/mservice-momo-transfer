@@ -1,0 +1,17 @@
+{
+    "name": "vandatpiko/mservice-momo-transfer",
+    "description": "Mservice Momo E-wallet",
+    "autoload": {
+        "psr-4": {
+            "Vandatpiko\\MserviceMomoTransfer\\": "src/"
+        }
+    },
+    "authors": [{
+        "name": "vandatpiko",
+        "email": "nguyenvandat.piko.29@gmail.com"
+    }],
+    "minimum-stability": "dev",
+    "require": {
+        "guzzlehttp/guzzle": "7.5.x-dev"
+    }
+}
