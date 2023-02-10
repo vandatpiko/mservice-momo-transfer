@@ -15,7 +15,7 @@
     }],
     "minimum-stability": "dev",
     "require": {
-        "guzzlehttp/guzzle": "7.5.x-dev",
-        "phpseclib/phpseclib": "3.0.x-dev"
+        "guzzlehttp/guzzle": "^7.0.1",
+        "phpseclib/phpseclib": "~1.0"
     }
 }
