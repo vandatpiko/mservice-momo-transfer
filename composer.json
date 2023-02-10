@@ -2,6 +2,9 @@
     "name": "vandatpiko/mservice-momo-transfer",
     "description": "Mservice Momo E-wallet",
     "autoload": {
+        "files": [
+            "src/helpers.php"
+        ],
         "psr-4": {
             "Vandatpiko\\MserviceMomoTransfer\\": "src/"
         }

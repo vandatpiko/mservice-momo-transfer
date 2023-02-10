@@ -35,4 +35,16 @@ class MserviceMomo extends Model
      */
 
     protected $casts = [];
+
+    /**
+     * static function create
+     */
+    public static function create(array $attributes = [])
+    {
+        return static::query()->create($attributes);
+    }
+
+    /**
+     * @param array $attributes
+     */
 }

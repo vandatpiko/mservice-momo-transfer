@@ -1,4 +1,20 @@
 <?php
+
+use VandatPiko\Mservice\Contracts\MserviceMomoContract;
+
+if (!function_exists('mservice')){
+    /**
+     * @return VandatPiko\Mservice\Contracts\MserviceMomoContract
+     */
+    function mservice($userId = ''){
+        $factory = app(MserviceMomoContract::class);
+        if (func_num_args() === 0){
+            return $factory;
+        }
+        return $factory->setMserviceMomo($userId);
+    }
+}
+
 if (!function_exists('convertPhonenumber')) {
     /**
      * convert phonenumber
@@ -58,5 +74,48 @@ if (!function_exists('convertPhonenumber')) {
         }
 
         return $phonenumber;
+    }
+}
+
+if (!function_exists('generateRandom')) {
+    function generateRandom($length){
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString.= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
+    }
+}
+
+if (!function_exists('generateRandomString')) {
+    function generateRandomString($length){
+        $characters = '0123456789abcdef';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString.= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
+    }
+}
+
+if (!function_exists('getMicrotime')) {
+    function getMicrotime()
+    {
+        return round(microtime(true) * 1000);
+    }
+}
+
+if (!function_exists('generateImei')){
+    function generateImei(){
+        return generateRandomString(8) . '-' . generateRandomString(4) . '-' . generateRandomString(4) . '-' . generateRandomString(4) . '-' . generateRandomString(12);
+    }
+}
+
+if (!function_exists('generateToken')) {
+    function generateToken(){
+        return generateRandom(22) . ':' .generateRandom(9) . '-' .generateRandom(20) . '-' .generateRandom(12) . '-' .generateRandom(7) . '-' .generateRandom(7) . '-' .generateRandom(53) . '-' .generateRandom(9) . '_' .generateRandom(11) . '-' .generateRandom(4);
     }
 }

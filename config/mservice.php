@@ -1,11 +1,11 @@
 <?php
 
 return [
+    'guard' => null,
     /**
      * Default model name
      *
      */
-
     'model'         => VandatPiko\Mservice\Models\MserviceMomo::class,
     /**
      *
@@ -57,5 +57,9 @@ return [
         'mcc'       => '452',
 
         'device_os' => 'ios',
-    ]
+    ],
+    /**
+     * Timeout in seconds
+     */
+    'timeout' => 10
 ];

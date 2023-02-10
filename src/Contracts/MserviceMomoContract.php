@@ -1,10 +1,12 @@
 <?php
-interface MserivceMomoContract
+namespace VandatPiko\Mservice\Contracts;
+
+interface MserviceMomoContract
 {
     /**
      * @var string
      */
-    public function loginAuth($password);
+    public function loginAuth(string $password);
     /**
      * @var string
      */
@@ -13,4 +15,9 @@ interface MserivceMomoContract
      * @var string
      */
     public function verifyOTP(string $otp);
+
+    /**
+     * @var string
+     */
+    public function setMserviceMomo($userId);
 }

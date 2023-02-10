@@ -2,11 +2,15 @@
 
 namespace VandatPiko\Mservice;
 
+use GuzzleHttp\Client;
+use Illuminate\Contracts\Auth\Factory;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Collection;
 use Illuminate\Support\ServiceProvider;
+use VandatPiko\Mservice\Contract\MserivceMomoContract;
+use VandatPiko\Mservice\Models\MserviceMomo;
 
-class MserviceMomoTransferSerivceProvider extends ServiceProvider
+class MserviceMomoTransferServiceProvider extends ServiceProvider
 {
     public function boot()
     {
@@ -16,7 +20,7 @@ class MserviceMomoTransferSerivceProvider extends ServiceProvider
             ], 'mservice-config');
 
             $this->publishes([
-                __DIR__ . '/../database/migrations/create_mservice_momos_table.php' => $this->getMigrationFileName('create_mservice__momos_table.php'),
+                __DIR__ . '/../database/migrations/create_mservice_momos_table.php' => $this->getMigrationFileName('create_mservice_momos_table.php'),
             ]);
         }
 
@@ -25,6 +29,18 @@ class MserviceMomoTransferSerivceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(__DIR__. '/../config/mservice.php', 'mservice');
+
+        $this->app->singleton(MserivceMomoContract::class, function ($app) {
+            $authFactory = app()->make(Factory::class);
+            if (is_null(config('mservice.guard'))) {
+                return new MserviceMomoTransfer(new Client([
+                    'timeout'   => config('mservice.timeout'),
+                ]), $authFactory);
+            }
+            return new MserviceMomoTransfer(new Client([
+                'timeout'   => config('mservice.timeout'),
+            ]), $authFactory->guard(config('mservice.guard')));
+        });
     }
 
     /**
